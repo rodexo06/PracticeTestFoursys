@@ -13,18 +13,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "driven", "driven", "{BE2AE7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "driver", "driver", "{7E927A22-660E-4CE7-869F-2427C156058D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeTestFoursys.Domain", "PracticeTestFoursys.Domain\PracticeTestFoursys.Domain.csproj", "{5EA83F1D-C9A1-4E10-B80F-DB0E0254AE1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeTestFoursys.Domain", "PracticeTestFoursys.Domain\PracticeTestFoursys.Domain.csproj", "{5EA83F1D-C9A1-4E10-B80F-DB0E0254AE1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeTestFoursys.Application", "PracticeTestFoursys.Application\PracticeTestFoursys.Application.csproj", "{E1343411-774E-47E3-ADE0-68A795EEB9E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeTestFoursys.Application", "PracticeTestFoursys.Application\PracticeTestFoursys.Application.csproj", "{E1343411-774E-47E3-ADE0-68A795EEB9E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeTestFoursys.Infra", "PracticeTestFoursys.Infra\PracticeTestFoursys.Infra.csproj", "{D6EBE58B-FFA2-4115-91B9-1DC5640F4C75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeTestFoursys.Infra", "PracticeTestFoursys.Infra\PracticeTestFoursys.Infra.csproj", "{D6EBE58B-FFA2-4115-91B9-1DC5640F4C75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeTestFoursys.Api", "PracticeTestFoursys.Api\PracticeTestFoursys.Api.csproj", "{AABDA50A-55BC-49E5-B4A2-73C8D308FF6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeTestFoursys.Api", "PracticeTestFoursys.Api\PracticeTestFoursys.Api.csproj", "{AABDA50A-55BC-49E5-B4A2-73C8D308FF6C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5526C4EC-F199-4897-B8F9-287C8D09732A}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeTestFoursys.Console", "PracticeTestFoursys.Console\PracticeTestFoursys.Console.csproj", "{0F6A07E4-A308-4BD3-807A-4ABF0171F2F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,10 @@ Global
 		{AABDA50A-55BC-49E5-B4A2-73C8D308FF6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AABDA50A-55BC-49E5-B4A2-73C8D308FF6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AABDA50A-55BC-49E5-B4A2-73C8D308FF6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6A07E4-A308-4BD3-807A-4ABF0171F2F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6A07E4-A308-4BD3-807A-4ABF0171F2F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6A07E4-A308-4BD3-807A-4ABF0171F2F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6A07E4-A308-4BD3-807A-4ABF0171F2F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{E1343411-774E-47E3-ADE0-68A795EEB9E4} = {CF47B81C-0CF5-466D-A20C-58E27406AC9C}
 		{D6EBE58B-FFA2-4115-91B9-1DC5640F4C75} = {BE2AE706-8F6A-4BED-BF0A-4143302A553A}
 		{AABDA50A-55BC-49E5-B4A2-73C8D308FF6C} = {7E927A22-660E-4CE7-869F-2427C156058D}
+		{0F6A07E4-A308-4BD3-807A-4ABF0171F2F8} = {7E927A22-660E-4CE7-869F-2427C156058D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {305D1F92-F0B5-4532-A7C8-97C1A09308BA}

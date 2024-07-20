@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PracticeTestFoursys.Application\PracticeTestFoursys.Application.csproj" />
+    <ProjectReference Include="..\PracticeTestFoursys.Domain\PracticeTestFoursys.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@ using System.Reflection;
 using PracticeTestFoursys.Application.DependenciesInjections;
 using PracticeTestFoursys.Application.Repositories;
 using PracticeTestFoursys.Infra.Context;
+using PracticeTestFoursys.Infra.UOW;
 
 
 namespace PracticeTestFoursys.Infra
@@ -26,6 +27,7 @@ namespace PracticeTestFoursys.Infra
             //    .AsImplementedInterfaces()
             //    .WithScopedLifetime());
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddDependencies(Assembly.GetAssembly(typeof(DependencyInjection)));
 

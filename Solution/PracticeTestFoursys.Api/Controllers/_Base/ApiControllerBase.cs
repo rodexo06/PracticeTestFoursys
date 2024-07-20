@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using AutoMapper;
 using PracticeTestFoursys.Application.Commands._Base;
+using MediatR;
 
 namespace PracticeTestFoursys.Api.Controllers._Base {
     [Route("api/[controller]")]
@@ -11,6 +12,7 @@ namespace PracticeTestFoursys.Api.Controllers._Base {
     [Authorize]
     public class ApiControllerBase<T> : ControllerBase {
         protected readonly IMapper _mapper;
+        private IMediator? _mediator;
 
         public ApiControllerBase(IMapper mapper) => _mapper = mapper;
 
