@@ -16,6 +16,7 @@ namespace PracticeTestFoursys.Application.Repositories
         void Update(T entity);
         void Remove(T entity);
         void RemoveList(IEnumerable<T> entity);
-        void BulkInsertBinaryImporter(IEnumerable<T> entities, string table, string columnsList);
+        void BulkMergeADO(IEnumerable<T> entities, string table, string columns);
+        void BulkMergeEF(IEnumerable<T> entities);
     }
 }

@@ -29,16 +29,16 @@ namespace PracticeTestFoursys.Infra.Migrations
                         .HasColumnName("positionid")
                         .HasAnnotation("Relational:JsonPropertyName", "positionId");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date")
+                        .HasAnnotation("Relational:JsonPropertyName", "date");
+
                     b.Property<string>("ClientId")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("clientid")
                         .HasAnnotation("Relational:JsonPropertyName", "clientId");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date")
-                        .HasAnnotation("Relational:JsonPropertyName", "date");
 
                     b.Property<string>("ProductId")
                         .IsRequired()
@@ -56,7 +56,7 @@ namespace PracticeTestFoursys.Infra.Migrations
                         .HasColumnName("value")
                         .HasAnnotation("Relational:JsonPropertyName", "value");
 
-                    b.HasKey("PositionId");
+                    b.HasKey("PositionId", "Date");
 
                     b.ToTable("positions");
                 });

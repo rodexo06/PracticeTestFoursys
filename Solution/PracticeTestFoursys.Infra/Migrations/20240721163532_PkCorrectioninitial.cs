@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PracticeTestFoursys.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class PkCorrectioninitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,9 +16,9 @@ namespace PracticeTestFoursys.Infra.Migrations
                 columns: table => new
                 {
                     positionid = table.Column<string>(type: "text", nullable: false),
+                    date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     productid = table.Column<string>(type: "text", nullable: false),
                     clientid = table.Column<string>(type: "text", nullable: false),
-                    date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     value = table.Column<decimal>(type: "numeric", nullable: false),
                     quantity = table.Column<decimal>(type: "numeric", nullable: false)
                 },
@@ -30,9 +30,9 @@ namespace PracticeTestFoursys.Infra.Migrations
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-    {
-        migrationBuilder.DropTable(
-            name: "positions");
+        {
+            migrationBuilder.DropTable(
+                name: "positions");
+        }
     }
-}
 }

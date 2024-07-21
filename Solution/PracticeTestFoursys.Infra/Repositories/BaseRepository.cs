@@ -74,7 +74,7 @@ namespace PracticeTestFoursys.Infra.Repositories
             return;
         }
 
-        public void BulkInsertBinaryImporter(IEnumerable<T> entities, string table, string columns)
+        public void BulkMergeADO(IEnumerable<T> entities, string table, string columns)
         {
             string TEMP_TABLE = $"Temp_{table}";
             const int BULK_TIMEOUT = 60 * 10;
@@ -144,6 +144,12 @@ namespace PracticeTestFoursys.Infra.Repositories
             cmd.CommandText = $"drop TABLE {TEMP_TABLE};";
             cmd.ExecuteNonQuery();
             conn.Close();
+        }
+
+        public void BulkMergeEF(IEnumerable<T> entities)
+        {
+            _context.BulkMerge(entities);
+            return;
         }
 
         private NpgsqlDbType GetNpgsqlDbType(Type type)

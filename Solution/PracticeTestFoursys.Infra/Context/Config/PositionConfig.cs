@@ -10,12 +10,15 @@ namespace PracticeTestFoursys.Infra.Context.Config
         {
             builder.ToTable("positions");
 
-            builder.HasKey(p => new { p.PositionId, p.Date });
 
             builder.Property(p => p.PositionId)
                 .IsRequired()
                 .HasColumnName("positionid")
-                .HasMaxLength(100); 
+                .HasMaxLength(100);
+
+            builder.Property(p => p.Date)
+                .HasColumnName("date")
+                .IsRequired();
 
             builder.Property(p => p.ProductId)
                 .IsRequired()
@@ -27,10 +30,6 @@ namespace PracticeTestFoursys.Infra.Context.Config
                 .HasColumnName("clientid")
                 .HasMaxLength(100);
 
-            builder.Property(p => p.Date)
-                .HasColumnName("date")
-                .IsRequired();
-
             builder.Property(p => p.Value)
                 .IsRequired()
                 .HasColumnName("value")
@@ -40,6 +39,8 @@ namespace PracticeTestFoursys.Infra.Context.Config
                 .IsRequired()
                 .HasColumnName("quantity")
                 .HasColumnType("decimal(18, 8)");
+
+            builder.HasKey(p => new { p.Date, p.PositionId});
         }
     }
 }

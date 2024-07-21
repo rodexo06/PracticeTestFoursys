@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using PracticeTestFoursys.Console.Contracts;
 using PracticeTestFoursys.Infra;
 using PracticeTestFoursys.Infra.Context;
@@ -22,9 +23,9 @@ class Program
             {
                 var env = context.HostingEnvironment;
                 config.SetBasePath(Directory.GetCurrentDirectory());
-                      //.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                      //.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                      //.AddEnvironmentVariables();
+                //.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                //.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                //.AddEnvironmentVariables();
             })
             .ConfigureServices((context, services) =>
             {
@@ -39,8 +40,17 @@ class Program
                 });
                 services.AddScoped<IJsonDataProcessor, JsonDataProcessor>();
                 services.AddDbContext<PositionContext>(options =>
-                    options.UseNpgsql(connectionString, b => b.MigrationsAssembly("PracticeTestFoursys.Infra")));
-            });
+                    options.UseNpgsql(connectionString, b => b.MigrationsAssembly("PracticeTestFoursys.Infra"))
+                    .LogTo(Console.WriteLine, LogLevel.Warning)
+                    );
+            })
+                       .ConfigureLogging(logging =>
+                    {
+                        logging.ClearProviders();
+                        logging.AddConsole();
+                        logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+                        //logging.SetMinimumLevel(LogLevel.Warning, LogLevel.Error, LogLevel.Information);
+                    });
 
 
     private static void ApplyMigrations(IHost host)

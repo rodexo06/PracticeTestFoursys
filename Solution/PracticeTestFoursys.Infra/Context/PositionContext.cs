@@ -16,7 +16,8 @@ namespace PracticeTestFoursys.Infra.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            modelBuilder.UseIdentityByDefaultColumns();
+            modelBuilder.Entity<Position>()
+                .HasKey(p => new { p.PositionId, p.Date });
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
                 entity.SetTableName(entity.GetTableName().ToLowerInvariant());
