@@ -11,7 +11,7 @@ namespace PracticeTestFoursys.Infra.Context
         {
         }
 
-        public DbSet<Position> Position { get; set; }
+        public DbSet<Position> Positions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

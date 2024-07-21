@@ -18,11 +18,11 @@ namespace PracticeTestFoursys.Infra.Repositories
         }
         public IQueryable<Position> FindByClientId(string clientId)
         {
-            return _context.Position.Where(x => x.ClientId == clientId);
+            return _context.Positions.Where(x => x.ClientId == clientId);
         }
         public async Task<List<Position>> GetTop10PositionsByValueAsync()
         {
-            var top10Positions = await _context.Position
+            var top10Positions = await _context.Positions
            .OrderByDescending(p => p.Value)
            .Take(10)
            .ToListAsync();

@@ -14,15 +14,15 @@ namespace PracticeTestFoursys.Infra.Context.Config
 
             builder.Property(p => p.PositionId)
                 .IsRequired()
-                .HasMaxLength(50); 
+                .HasMaxLength(100); 
 
             builder.Property(p => p.ProductId)
                 .IsRequired()
-                .HasMaxLength(50); 
+                .HasMaxLength(100); 
 
             builder.Property(p => p.ClientId)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
 
             builder.Property(p => p.Date)
                 .IsRequired();
