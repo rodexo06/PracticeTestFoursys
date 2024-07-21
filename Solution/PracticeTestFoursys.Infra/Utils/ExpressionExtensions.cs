@@ -13,7 +13,7 @@ namespace PracticeTestFoursys.Infra.Expressions {
         /// </summary>
         /// <param name="expression">The property selector expression.</param>
         /// <returns>The extracted textual representation of the expression's path.</returns>
-        public static string AsPath(this LambdaExpression expression)
+        public static string? AsPath(this LambdaExpression expression)
         {
             if (expression is null)
             {

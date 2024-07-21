@@ -22,7 +22,7 @@ class Program
                     client.BaseAddress = new Uri("https://api.andbank.com.br");
                 });
                 services.AddScoped<IJsonDataProcessor, JsonDataProcessor>();
-                services.AddDbContext<PracticeTestFoursysContext>(options =>
+                services.AddDbContext<PositionContext>(options =>
                 {
                     options.UseNpgsql("YourConnectionString");
                 });

@@ -15,7 +15,7 @@ namespace PracticeTestFoursys.Infra
         public static IServiceCollection AddInfra(this IServiceCollection services, IConfiguration configuration)
         {
             services
-                .Scan(scan => scan.FromAssemblyOf<PracticeTestFoursysContext>()
+                .Scan(scan => scan.FromAssemblyOf<PositionContext>()
                 .AddClasses(classes => classes.AssignableTo(typeof(IBaseRepository<>)))
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());

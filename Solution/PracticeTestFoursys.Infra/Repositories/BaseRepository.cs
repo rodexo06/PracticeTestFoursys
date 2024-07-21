@@ -14,8 +14,8 @@ namespace PracticeTestFoursys.Infra.Repositories
 {
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        protected readonly PracticeTestFoursysContext _context;
-        public BaseRepository(PracticeTestFoursysContext context)
+        protected readonly PositionContext _context;
+        public BaseRepository(PositionContext context)
         {
             _context = context;
         }

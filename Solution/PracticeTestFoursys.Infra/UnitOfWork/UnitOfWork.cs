@@ -4,9 +4,9 @@ using PracticeTestFoursys.Infra.Context;
 namespace PracticeTestFoursys.Infra.UOW {
     public class UnitOfWork : IUnitOfWork {
         private bool _disposed;
-        private readonly PracticeTestFoursysContext _context;
+        private readonly PositionContext _context;
 
-        public UnitOfWork(PracticeTestFoursysContext context) =>
+        public UnitOfWork(PositionContext context) =>
             _context = context;
 
         public async Task<int> CommitAsync() =>

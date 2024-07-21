@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace PracticeTestFoursys.Domain.Entities
 {
-    public class PracticeTestItem
+    public class Position
     {
-        public PracticeTestItem(string practiceTestItemId, string positionId, string productId, string clientId, DateTime date, decimal value, decimal quantity)
+        public Position(string practiceTestItemId, string positionId, string productId, string clientId, DateTime date, decimal value, decimal quantity)
         {
             PositionId = positionId;
             ProductId = productId;
@@ -17,10 +17,8 @@ namespace PracticeTestFoursys.Domain.Entities
             Date = date;
             Value = value;
             Quantity = quantity;
-            PracticeTestItemId = $"{positionId}{date}";
         }
 
-        public required string PracticeTestItemId { get; set; }
         public required string PositionId { get; set; }
         public required string ProductId { get; set; }
         public required string ClientId { get; set; }

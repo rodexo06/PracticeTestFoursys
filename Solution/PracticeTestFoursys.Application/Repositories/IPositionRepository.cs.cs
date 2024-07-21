@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace PracticeTestFoursys.Application.Repositories
 {
-    public interface IPracticeTestItemRepository : IBaseRepository<PracticeTestItem>
+    public interface IPositionRepository : IBaseRepository<Position>
     {
+        IQueryable<Position> FindByClientId(string clientId);
+        Task<List<Position>> GetTop10PositionsByValueAsync();
 
     }
 }

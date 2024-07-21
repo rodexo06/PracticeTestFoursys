@@ -18,11 +18,11 @@ public class JsonDataProcessor : IJsonDataProcessor
         };
 
 
-    IPracticeTestItemRepository _practiceTestItemRepository;
-    public JsonDataProcessor(IApiDataFetcher dataFetcher, IPracticeTestItemRepository practiceTestItemRepository)
+    IPositionRepository _positionRepository;
+    public JsonDataProcessor(IApiDataFetcher dataFetcher, IPositionRepository positionRepository)
     {
         _dataFetcher = dataFetcher;
-        _practiceTestItemRepository = practiceTestItemRepository;
+        _positionRepository = positionRepository;
     }
 
     public async Task ProcessDataAsync()
@@ -30,7 +30,7 @@ public class JsonDataProcessor : IJsonDataProcessor
 
         Console.WriteLine($"Start fetch data from client");
         var stream = await _dataFetcher.FetchDataAsync("/candidate/positions", headers);
-        var listBuffer = new List<PracticeTestItem>();
+        var listBuffer = new List<Position>();
         var documentOptions = new JsonDocumentOptions { AllowTrailingCommas = true };
         int totalProgress = 0;
         int sumProgress = 0;
@@ -42,7 +42,7 @@ public class JsonDataProcessor : IJsonDataProcessor
             Console.WriteLine($"Start bulk process");
             foreach (var element in enumerator)
             {
-                var item = JsonSerializer.Deserialize<PracticeTestItem>(element.GetRawText());
+                var item = JsonSerializer.Deserialize<Position>(element.GetRawText());
 
                 if (item != null)
                 {
@@ -50,7 +50,7 @@ public class JsonDataProcessor : IJsonDataProcessor
 
                     if (listBuffer.Count >= 50000)
                     {
-                        await _practiceTestItemRepository.BulkInsertBinaryImporter(listBuffer, table, columns);
+                        await _positionRepository.BulkInsertBinaryImporter(listBuffer, table, columns);
                         listBuffer.Clear();
                         sumProgress += listBuffer.Count;
                         Console.WriteLine($"Process Data {sumProgress / totalProgress}%");
@@ -61,7 +61,7 @@ public class JsonDataProcessor : IJsonDataProcessor
 
         if (listBuffer.Count > 0)
         {
-            await _practiceTestItemRepository.BulkInsertBinaryImporter(listBuffer, table, columns);
+            await _positionRepository.BulkInsertBinaryImporter(listBuffer, table, columns);
         }
         Console.WriteLine($"Finish bulk process");
     }
