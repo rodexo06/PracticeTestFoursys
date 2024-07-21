@@ -16,6 +16,15 @@ namespace PracticeTestFoursys.Infra.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.UseIdentityByDefaultColumns();
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                entity.SetTableName(entity.GetTableName().ToLowerInvariant());
+                foreach (var property in entity.GetProperties())
+                {
+                    property.SetColumnName(property.GetColumnName().ToLowerInvariant());
+                }
+            }
         }
     }
 }

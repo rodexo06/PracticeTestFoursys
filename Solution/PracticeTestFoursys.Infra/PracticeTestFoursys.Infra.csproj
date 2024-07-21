@@ -25,4 +25,8 @@
     <ProjectReference Include="..\PracticeTestFoursys.Domain\PracticeTestFoursys.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

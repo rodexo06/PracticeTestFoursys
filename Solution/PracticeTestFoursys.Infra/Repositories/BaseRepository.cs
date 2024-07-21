@@ -74,24 +74,76 @@ namespace PracticeTestFoursys.Infra.Repositories
             return;
         }
 
-        public async Task BulkInsertBinaryImporter(IEnumerable<T> entities, string table, string columns)
+        public void BulkInsertBinaryImporter(IEnumerable<T> entities, string table, string columns)
         {
+            string TEMP_TABLE = $"Temp_{table}";
+            const int BULK_TIMEOUT = 60 * 10;
+            string TEMP_CREATE = @$"CREATE temp TABLE IF NOT EXISTS {TEMP_TABLE}
+                (
+                    positionid text  NOT NULL,
+                    productid text NOT NULL,
+                    clientid text NOT NULL,
+                    date timestamp NOT NULL,
+                    value numeric NOT NULL,
+                    quantity numeric NOT NULL
+                )";
+
+            string TEMP_MERGE = @$"
+            MERGE INTO {table} AS TARGET
+            USING {TEMP_TABLE} AS Source
+            ON TARGET.positionid = SOURCE.positionid
+		        AND TARGET.date = source.date
+            WHEN NOT MATCHED
+	            THEN
+		            INSERT (positionid,productid,clientid,date,value,quantity)
+                    VALUES (SOURCE.positionid,SOURCE.productid,SOURCE.clientid,
+                            SOURCE.date,SOURCE.value,SOURCE.quantity)
+            WHEN MATCHED
+	            THEN
+		            UPDATE
+		            SET
+                    positionid = source.positionid, 
+                    productid = source.productid, 
+                    clientid = source.clientid, 
+                    date = source.date, 
+                    value = source.value, 
+                    quantity = source.quantity; 
+                    ";
+            string TEMP_SELECT = $"select * from {TEMP_TABLE} limit 0";
+
+            NpgsqlCommand cmd = null;
             NpgsqlConnection conn = (NpgsqlConnection)_context.Database.GetDbConnection();
-            using (NpgsqlBinaryImporter copyIn = conn.BeginBinaryImport($"COPY teachers ({columns}) FROM STDIN (FORMAT BINARY)"))
+            conn.Open();
+
+            cmd = new NpgsqlCommand(string.Empty, conn);
+            cmd.CommandTimeout = BULK_TIMEOUT;
+
+            cmd.CommandText = TEMP_CREATE;
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = TEMP_SELECT;
+
+            using (NpgsqlBinaryImporter copyIn = conn.BeginBinaryImport($"COPY {TEMP_TABLE} ({columns}) FROM STDIN (FORMAT BINARY)"))
             {
                 foreach (var entity in entities)
                 {
-                    await copyIn.StartRowAsync().ConfigureAwait(false);
+                    copyIn.StartRow();
 
                     foreach (PropertyInfo property in entity.GetType().GetProperties())
                     {
                         object value = property.GetValue(entity);
                         NpgsqlDbType dbType = GetNpgsqlDbType(property.PropertyType);
-                        await copyIn.WriteAsync(value, dbType).ConfigureAwait(false);
+                        copyIn.Write(value, dbType);
                     }
                 }
-                await copyIn.CompleteAsync().ConfigureAwait(false);
+                copyIn.Complete();
             }
+            cmd.CommandText = TEMP_MERGE;
+            _ = cmd.ExecuteNonQuery();
+
+            cmd.CommandText = $"drop TABLE {TEMP_TABLE};";
+            cmd.ExecuteNonQuery();
+            conn.Close();
         }
 
         private NpgsqlDbType GetNpgsqlDbType(Type type)

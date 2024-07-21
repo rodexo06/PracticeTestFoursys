@@ -16,6 +16,6 @@ namespace PracticeTestFoursys.Application.Repositories
         void Update(T entity);
         void Remove(T entity);
         void RemoveList(IEnumerable<T> entity);
-        Task BulkInsertBinaryImporter(IEnumerable<T> entities, string table, string columnsList);
+        void BulkInsertBinaryImporter(IEnumerable<T> entities, string table, string columnsList);
     }
 }

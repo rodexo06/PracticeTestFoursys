@@ -8,31 +8,37 @@ namespace PracticeTestFoursys.Infra.Context.Config
     {
         public void Configure(EntityTypeBuilder<Position> builder)
         {
-            builder.ToTable("Position");
+            builder.ToTable("positions");
 
             builder.HasKey(p => new { p.PositionId, p.Date });
 
             builder.Property(p => p.PositionId)
                 .IsRequired()
+                .HasColumnName("positionid")
                 .HasMaxLength(100); 
 
             builder.Property(p => p.ProductId)
                 .IsRequired()
+                .HasColumnName("productid")
                 .HasMaxLength(100); 
 
             builder.Property(p => p.ClientId)
                 .IsRequired()
+                .HasColumnName("clientid")
                 .HasMaxLength(100);
 
             builder.Property(p => p.Date)
+                .HasColumnName("date")
                 .IsRequired();
 
             builder.Property(p => p.Value)
                 .IsRequired()
+                .HasColumnName("value")
                 .HasColumnType("decimal(18, 8)");
 
             builder.Property(p => p.Quantity)
                 .IsRequired()
+                .HasColumnName("quantity")
                 .HasColumnType("decimal(18, 8)");
         }
     }
