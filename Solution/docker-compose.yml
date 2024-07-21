@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   db:
     image: postgres:latest
@@ -9,11 +8,34 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
+    networks:
+      - minha-rede
 
-volumes:
-  db_data:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.Api
+    depends_on:
+      - db
+    ports:
+      - "5082:5082"
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Username=userNpg;Password=passNpg;Database=postgres"
+    networks:
+      - minha-rede
 
+  console:
+    build:
+      context: .
+      dockerfile: Dockerfile.Console
+    depends_on:
+      - db
+    environment:
+      ConnectionString: "Host=db;Port=5432;Username=userNpg;Password=passNpg;Database=postgres"
+    networks:
+      - minha-rede
+    entrypoint: ["dotnet", "PracticeTestFoursys.Console.dll"] # Ajuste conforme necessário para iniciar o console
 
-
+networks:
+  minha-rede:
+    driver: bridge

@@ -9,7 +9,7 @@ using MediatR;
 namespace PracticeTestFoursys.Api.Controllers._Base {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ApiControllerBase<T> : ControllerBase {
         protected readonly IMapper _mapper;
         private IMediator _mediator;

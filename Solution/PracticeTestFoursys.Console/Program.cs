@@ -23,9 +23,6 @@ class Program
             {
                 var env = context.HostingEnvironment;
                 config.SetBasePath(Directory.GetCurrentDirectory());
-                //.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                //.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                //.AddEnvironmentVariables();
             })
             .ConfigureServices((context, services) =>
             {

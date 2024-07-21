@@ -13,11 +13,11 @@ namespace PracticeTestFoursys.Api.Controllers
         [HttpGet("/client/{clientId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetPositionbyClient([FromRoute] string id)
+        public async Task<IActionResult> GetPositionbyClient([FromRoute] string clientId)
         {
             try
             {
-                var command = new GetPositionbyClientQuery() { ClientId = id };
+                var command = new GetPositionbyClientQuery() { ClientId = clientId };
                 var result = await Mediator.Send(command);
                 return Ok(result);
             }
@@ -30,11 +30,11 @@ namespace PracticeTestFoursys.Api.Controllers
         [HttpGet("/client/{clientId}/summary")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetPositionbyClientSummary([FromRoute] string id)
+        public async Task<IActionResult> GetPositionbyClientSummary([FromRoute] string clientId)
         {
             try
             {
-                var command = new GetPositionbyClientSummaryQuery() { ClientId = id };
+                var command = new GetPositionbyClientSummaryQuery() { ClientId = clientId };
                 var result = await Mediator.Send(command);
                 return Ok(result);
             }
