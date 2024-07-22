@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PracticeTestFoursys.Application.Query
 {
-    public class GetPositionbyClientSummaryQuery : IRequest<ProductPositionSummaryModel>
+    public class GetPositionbyClientSummaryQuery : IRequest<List<ProductPositionSummaryModel>>
     {
         public string ClientId { get; set; }
     }
