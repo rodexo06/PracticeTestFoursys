@@ -1,8 +1,8 @@
 ﻿
 using AutoMapper;
 using Moq;
-using PracticeTestFoursys.Application.Query.Handler;
 using PracticeTestFoursys.Application.Query;
+using PracticeTestFoursys.Application.Query.Handler;
 using PracticeTestFoursys.Application.Repositories;
 using PracticeTestFoursys.Application.ViewModels;
 using PracticeTestFoursys.Domain.Entities;

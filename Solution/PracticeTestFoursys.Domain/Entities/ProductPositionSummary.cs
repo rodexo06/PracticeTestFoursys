@@ -1,4 +1,4 @@
-﻿namespace PracticeTestFoursys.Application.Query.Handler
+﻿namespace PracticeTestFoursys.Domain.Entities
 {
     public class ProductPositionSummary
     {

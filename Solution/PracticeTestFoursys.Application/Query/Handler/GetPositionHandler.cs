@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace PracticeTestFoursys.Application.Query.Handler
 {
     public class GetPositionHandler : IRequestHandler<GetPositionbyClientQuery, List<PositionModel>>,
-                                    IRequestHandler<GetPositionbyClientSummaryQuery, ProductPositionSummaryModel>,
+                                    IRequestHandler<GetPositionbyClientSummaryQuery, List<ProductPositionSummaryModel>>,
                                     IRequestHandler<GetPositionTop10Query, List<PositionModel>>
     {
         private readonly IMapper _mapper;
@@ -38,18 +38,20 @@ namespace PracticeTestFoursys.Application.Query.Handler
             return _mapper.Map<List<PositionModel>>(filteredPositions);
         }
 
-        public async Task<ProductPositionSummaryModel> Handle(GetPositionbyClientSummaryQuery request, CancellationToken cancellationToken)
+        public async Task<List<ProductPositionSummaryModel>> Handle(GetPositionbyClientSummaryQuery request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(request.ClientId))
             {
                 throw new ArgumentNullException(nameof(request.ClientId));
             }
 
-            var latestPositions = _positionRepository.FindByClientId(request.ClientId)
+            var latestPositions = await _positionRepository.FindByClientId(request.ClientId)
                 .GroupBy(p => p.PositionId)
-                .Select(g => g.OrderByDescending(p => p.Date).FirstOrDefault());
+                .Select(g => g.OrderByDescending(p => p.Date).FirstOrDefault())
+                .ToListAsync(cancellationToken);
 
             var productPositionSummaries = latestPositions
+                .Where(p => p != null) // Adicionado para evitar possíveis nulls
                 .GroupBy(p => p.ProductId)
                 .Select(g => new ProductPositionSummary
                 {
@@ -57,7 +59,7 @@ namespace PracticeTestFoursys.Application.Query.Handler
                     TotalValue = g.Sum(p => p.Value)
                 }).ToList();
 
-            return _mapper.Map<ProductPositionSummaryModel>(productPositionSummaries);
+            return _mapper.Map<List<ProductPositionSummaryModel>>(productPositionSummaries);
         }
 
         public async Task<List<PositionModel>> Handle(GetPositionTop10Query request, CancellationToken cancellationToken)
