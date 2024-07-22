@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "PracticeTestFoursys.Console": {
+        "commandName": "Project",
+        "environmentVariables": {
+            "ConnectionString": "Host=localhost;Port=5432;Username=userNpg;Password=passNpg;Database=postgres",
+            "ApiUrl": "https://api.andbank.com.br"
+        }
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
